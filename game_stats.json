@@ -1,0 +1,23 @@
+{
+  "total_attempts": 7,
+  "successful_unlocks": 7,
+  "level_completions": {
+    "1": 1,
+    "2": 3,
+    "3": 2
+  },
+  "events_triggered": {
+    "accent_confusion": 1
+  },
+  "variation_attempts": {
+    "intermediate_code": 1
+  },
+  "variation_completions": {
+    "intermediate_code": 1
+  },
+  "attempts_to_success": {
+    "intermediate_code": [
+      1
+    ]
+  }
+}
