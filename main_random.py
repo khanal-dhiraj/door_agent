@@ -4,6 +4,7 @@ import base64
 import asyncio
 import websockets
 import random
+import argparse
 from fastapi import FastAPI, WebSocket, Request, UploadFile, File
 from fastapi.responses import PlainTextResponse, JSONResponse
 from twilio.twiml.voice_response import VoiceResponse, Connect, Say, Stream
@@ -471,7 +472,7 @@ game_config_manager = GameConfigManager()
 # Current game state
 current_variation = None
 variation_attempts = {}  # Track attempts per call per variation
-game_mode = "sequential"  # "sequential", "random", "category", "specific", "difficulty", "tag"
+game_mode = "random"  # Changed default to "random" for automatic randomization
 filter_value = None  # Used for category/difficulty/tag filtering
 
 # Events to log from OpenAI
@@ -493,10 +494,18 @@ app = FastAPI()
 if not OPENAI_API_KEY:
     raise ValueError("Missing OpenAI API key. Please set OPENAI_API_KEY in your .env file.")
 
-# Set initial variation
+# Set initial variation - RANDOMIZED on startup
 available_variations = list(game_config_manager.get_all_variations().keys())
 if available_variations:
-    current_variation = available_variations[0]
+    current_variation = random.choice(available_variations)
+    print(f"\n🎲 Starting with random variation: {current_variation}")
+    config = game_config_manager.get_variation(current_variation)
+    if config:
+        print(f"   Game: {config.get('name', 'Unknown')}")
+        print(f"   Difficulty: {config.get('difficulty', 'Unknown')}")
+        print(f"   Category: {config.get('category', 'Unknown')}")
+else:
+    current_variation = None
 
 def get_next_variation(current: str, mode: str = "sequential", filter_val: str = None):
     """Get next variation based on game mode"""
@@ -1048,8 +1057,8 @@ async def send_session_update(openai_ws, variation: str, call_id: str):
 
     # Ensure prompt includes unlock_door instruction
     prompt = variation_config["prompt"]
-    if "call unlock_door function" not in prompt:
-        prompt += "\n\nIMPORTANT: Always call the unlock_door function when revealing the password!"
+    if "call unlock_door function" not in prompt.lower():
+        prompt += "\n\nIMPORTANT: Always call the unlock_door function when revealing the password with the correct password as the parameter!"
 
     session_update = {
         "type": "session.update",
