@@ -1,6 +1,6 @@
 {
-  "total_attempts": 14,
-  "successful_unlocks": 14,
+  "total_attempts": 15,
+  "successful_unlocks": 15,
   "level_completions": {
     "1": 1,
     "2": 3,
@@ -14,14 +14,16 @@
     "compliment_collector": 1,
     "conspiracy_theorist": 1,
     "math_guardian": 2,
-    "cipher_master": 1
+    "cipher_master": 1,
+    "socratic_paradox": 1
   },
   "variation_completions": {
     "intermediate_code": 3,
     "compliment_collector": 1,
     "conspiracy_theorist": 1,
     "math_guardian": 2,
-    "cipher_master": 1
+    "cipher_master": 1,
+    "socratic_paradox": 1
   },
   "attempts_to_success": {
     "intermediate_code": [
@@ -40,6 +42,9 @@
       1
     ],
     "cipher_master": [
+      1
+    ],
+    "socratic_paradox": [
       1
     ]
   }
