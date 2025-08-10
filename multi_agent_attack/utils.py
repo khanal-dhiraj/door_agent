@@ -12,7 +12,7 @@ async_client = AsyncOpenAI()
 
 # Model configuration
 STRONG_MODEL = "gpt-4.1-2025-04-14"  # Using available strong model
-WEAK_MODEL = "gpt-4.1-2025-04-14"  # Using available weaker model
+WEAK_MODEL = "gpt-4.1-nano-2025-04-14"  # Using available weaker model
 # WEAK_MODEL = "gpt-4.1-2025-04-14"
 
 # Note: The models you mentioned (gpt-4.1-2025-04-14 and gpt-4.1-nano-2025-04-14)

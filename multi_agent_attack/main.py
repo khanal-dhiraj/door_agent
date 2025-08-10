@@ -494,12 +494,12 @@ class AdversarialPipeline:
 if __name__ == "__main__":
     # Initialize pipeline with a password
     pipeline = AdversarialPipeline(
-        password="MOLLY",
-        max_turns=10
+        password="BAO",
+        max_turns=15
     )
 
     # Option 1: Run with async initial strategies + regular sequential runs
-    # pipeline.run_multiple_attempts(num_runs=3, use_async_initial=True)
+    pipeline.run_multiple_attempts(num_runs=3, use_async_initial=True)
 
     # Option 2: Run fully async with batching
-    asyncio.run(pipeline.run_multiple_attempts_async(num_runs=5, concurrent_batch_size=3))
+    # asyncio.run(pipeline.run_multiple_attempts_async(num_runs=5, concurrent_batch_size=3))
